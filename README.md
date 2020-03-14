@@ -5,7 +5,7 @@ This is a basic folder structure and asset framework for Dusk given the current 
 ## This repo begins in your Dusk SDK folder
 
 ### dusk_wads.7z - unzip these wads for your respective editor, or make more of your own.
-+ **dusk.wad** - general textures
++ dusk.wad - general textures
 
 + dusk_transparent.wad - transparent textures
 
