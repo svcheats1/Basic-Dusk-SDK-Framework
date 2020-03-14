@@ -4,8 +4,11 @@ Basic framework with some essential assets and tool direction
 This is a basic folder structure and asset framework for Dusk given the current decentralised nature of gathering additional required SDK assets and tools 
 
 **dusk.wad** - general textures
+
 dusk_transparent.wad - transparent textures
+
 ***dusk_qmdl.fgd** - entity definitions for the J.A.C.K. editor (and Hammer?) *not* TrenchBroom
+
 **entities.txt** - list of entities both sharing with and similar to Half-Life & Quake
 
 ## Other essential tools
