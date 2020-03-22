@@ -9,7 +9,9 @@ This is a basic folder structure and asset framework for Dusk given the current 
 
 + dusk_transparent.wad - transparent textures
 
-***dusk_qmdl.fgd** - entity definitions for the J.A.C.K. editor (and Hammer?) *not* TrenchBroom
+**dusk.fgd** - entity definitions for the TrenchBroom editor 
+
+**dusk_qmdl.fgd** - entity definitions for the J.A.C.K. editor 
 
 **entities.txt** - list of entities both sharing with and similar to Half-Life & Quake
 

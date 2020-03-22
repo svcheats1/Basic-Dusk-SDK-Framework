@@ -1,0 +1,589 @@
+//
+// Quake game definition file (.fgd)
+// for Jackhammer 1.0 and above
+//
+// written by autolycus / autolycus@planetquake.com
+// modified by XaeroX / support@hlfx.ru
+//
+
+//
+// worldspawn
+//
+
+@SolidClass = worldspawn : "World entity"
+[
+	message(string) : "Text on entering the world"
+	worldtype(choices) : "Ambience" : 0 =
+	[
+		0 : "Medieval"
+		1 : "Runic (metal)"
+		2 : "Present (base)"
+	]
+	sky(sky) : "Sky name (modified engines only)"
+	sounds(integer) : "CD track to play" : 1
+	light(integer) : "Default light level"
+]
+
+//
+// base marker definitions
+//
+
+@baseclass = Appearflags [
+	spawnflags(Flags) =
+	[
+		256 : "Not in Easy" : 0
+		512 : "Not in Normal" : 0
+		1024 : "Not in Hard" : 0
+		2048 : "Not in Deathmatch" : 0
+	]
+]
+
+@baseclass = Targetname [ targetname(target_source) : "Name" ]
+@baseclass = Target [ target(target_destination) : "Target" ]
+
+//
+// player starts, deathmatch, coop, teleport
+//
+
+@baseclass base(Appearflags) flags(Angle) size(-16 -16 -24, 16 16 32) offset(0 0 24) 
+	color(0 255 0) = PlayerClass []
+
+@PointClass base(PlayerClass) = info_player_start : "Player 1 start" []
+@PointClass base(PlayerClass) = info_player_deathmatch : "Player deathmatch start" []
+@PointClass base(PlayerClass) = info_player_coop : "Player cooperative start" []
+@PointClass base(PlayerClass, Targetname) = info_teleport_destination : "Teleport destination" []
+@PointClass = info_null : "info_null (spotlight target)"
+[
+	targetname(target_source) : "Name" 
+]
+
+//
+// CTF stuff
+//
+
+@PointClass base(Appearflags) = info_intermission : "Intermission camera" []
+
+//
+// items
+//
+
+@baseclass size(32 32 32) color(80 0 200) base(Appearflags) = Ammo
+[
+	spawnflags(flags) = 
+	[
+		1 : "Large box" : 0
+	]
+]
+
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_blue_card : "Blue Key Card" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_blue_key : "Blue Key" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_blue_magic : "Blue Magic Key" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_red_card : "Red Key Card" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_red_key : "Red Key" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_red_magic : "Red Magic Key" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_yellow_card : "Yellow Key Card" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_yellow_key : "Yellow Key" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/w_g_key.mdl") = 
+	key_yellow_magic : "Yellow Key Magic" []
+
+//
+// badasses
+//
+
+@baseclass base(Appearflags, Targetname, Target) flags(Angle) color(220 0 0) offset(0 0 24) = Monster 
+[
+	spawnflags(Flags) = 
+	[
+		1 : "Ambush" : 0
+	]
+]
+
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/soldier.mdl") = monster_soldier : "Grunt" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/soldier.mdl") = monster_bigjohn : "Big John" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/soldier.mdl") = monster_jakob : "Jakob" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 64) studio("progs/ogre.mdl") = monster_leatherneck : "Leatherneck" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_blackphillip : "Black Phillip" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/wizard.mdl") = monster_mage : "Mage Wizard" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/wizard.mdl") = monster_mage_red : "Grand Wizard" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/hknight.mdl") = monster_scarecrow : "Scarecrow" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/hknight.mdl") = monster_scarecrow_post : "Scarecrow on post" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 32) studio("progs/zombie.mdl") = monster_forkmaiden : "Fork Maiden" []
+@PointClass base(Monster) size(32 32 48) studio("progs/tarbaby.mdl") = monster_rat : "Rat" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 48) studio("progs/shalrath.mdl") = monster_rat_boss : "Rat Boss" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/enforcer.mdl") = monster_welder : "Welder" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/soldier.mdl") = monster_scientist : "Scientist" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 48) studio("progs/shalrath.mdl") = monster_wendigo : "Wendigo" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/knight.mdl") = monster_cowgirl : "Cowgirl" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/soldier.mdl") = monster_turret : "Turret" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/knight.mdl") = monster_priestess : "Priestess" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_cartdog : "Nasty Doggie" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 64) studio("progs/demon.mdl") = monster_bonemonk : "Bone Monk" []
+@PointClass base(Monster) size(32 32 48) studio("progs/fish.mdl") = monster_fish : "Chomper's Son" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 32) studio("progs/zombie.mdl") = monster_horror : "Horror" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 64) studio("progs/teleport.mdl") = monster_boneball : "Bone Ball" []
+
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_intoxigator : "Intoxigator" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_intoxigator_senior : "Intoxigator Senior" []
+@PointClass base(Monster) size(32 32 48) studio("progs/fish.mdl") = monster_intoxigator_small : "Intoxigator Small" []
+@PointClass base(Monster) size(32 32 48) studio("progs/fish.mdl") = monster_intoxigator_son : "Intoxigator's Son" []
+@PointClass base(Monster) size(32 32 48) studio("progs/fish.mdl") = monster_intoxigator_son_baby : "Intoxigator's Baby Son" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_experiment : "The Experiment" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 40) studio("progs/dog.mdl") = monster_experiment_failed : "The Experiment (Failed)" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 64) studio("progs/demon.mdl") = monster_chomper : "Chomper" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 40) studio("progs/hknight.mdl") = monster_mama : "Mama Cowgirl" []
+@PointClass base(Monster) size(-32 -32 -24, 32 32 64) studio("progs/shambler.mdl") = monster_guardian : "Guardian" []
+@PointClass base(Monster) size(-16 -16 -24, 16 16 32) studio("progs/oldone.mdl") = monster_nyarlathotep : "Nyarlathotep" []
+
+//
+// lights
+//
+
+@BaseClass = Light 
+[
+	_light(color255) : "Brightness" : "255 255 128 200" : "First three integer numbers are the color (RGB). The fourth number is the brightness."
+	style(Choices) : "Appearance" : 0 : "Light appearance. Values:" =
+	[
+		0 : "Normal"
+		10: "Fluorescent flicker"
+		2 : "Slow, strong pulse"
+		11: "Slow pulse, noblack"
+		5 : "Gentle pulse"
+		1 : "Flicker A"
+		6 : "Flicker B"
+		3 : "Candle A"
+		7 : "Candle B"
+		8 : "Candle C"
+		4 : "Fast strobe"
+		9 : "Slow strobe"
+	]
+	pattern(string) : "Custom Appearance" : : "Use a string of letters to provide a custom light style. The property allows you to enter a string of letters from a to z, representing brightness. If you entered 'abcdefghihgfedcba' then the light would go from bright to dim and back again and then repeat. Complicating things, to use this feature, you must name the light. However, if you then use a trigger to activate it, then it will behave as a normal light."
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) flags(Light) base(Targetname, Target, Light) iconsprite("sprites/light.spr") = 
+	light : "Invisible lightsource"
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+
+// 
+// moving things
+//
+
+@baseclass base(Appearflags, Targetname) = Door
+[
+	speed(integer) : "Speed" : 100
+	key(choices) : "Key Lock" : 0 =
+	[
+		0 : "Unlocked"
+		1 : "Red Key"
+		2 : "Blue Key"
+		3 : "Yellow Key"
+	]
+	wait(choices) : "Delay before close" : 4 = 
+	[
+		-1 : "Stays open"
+	]
+	lip(integer) : "Lip"
+	dmg(integer) : "Damage inflicted when blocked" : 0
+	message(string) : "Message if triggered"
+	health(integer) : "Health (shoot open)" : 0
+]
+
+@SolidClass base(Door) = func_door : "Basic door" 
+[
+	spawnflags(flags) =
+	[
+		1 : "Starts Open" : 0
+		4 : "Don't link" : 0
+		8 : "Gold Key required" : 0
+        16: "Silver Key required" : 0
+        32: "Toggle" : 0
+	]
+]
+
+@SolidClass base(Door) = func_door_secret : "Triggered door" 
+[
+	spawnflags(flags) = 
+	[
+		1 : "Open once only" : 0
+		2 : "Moves left first" : 0
+		4 : "Moves down first" : 0
+		8 : "Not shootable" : 0
+        16 : "Always shootable" : 0
+	]
+]
+
+@SolidClass base(Door) = func_door_rotating : "Rotating door" 
+[
+	spawnflags(flags) =
+	[
+		2 : "Reverse Dir" : 0
+		16: "One-way" : 0
+		64: "X Axis" : 0
+		128: "Y Axis" : 0
+	]
+	distance(integer) : "Distance (deg)" : 90
+]
+
+@SolidClass = func_button : "Button" 
+[
+	speed(integer) : "Speed" : 5
+	target(target_destination) : "Targeted object"
+	health(integer) : "Health (shootable if > 0)"
+	sounds(choices) : "Sounds" : 1 = 
+	[
+		1: "Steam metal"
+		2: "Wooden clunk"
+		3: "Metallic clink"
+		4: "In-out"
+	]
+	wait(choices) : "Delay before reset" : 3 =
+	[
+		-1: "Stays pressed"
+	]
+	delay(integer) : "Delay before trigger"
+]
+
+@PointClass base(Targetname) flags(Path) size(16 16 16) = path_corner : "Moving platform stop"
+[
+	target(target_destination) : "Next stop target"
+]
+
+@SolidClass = func_plat : "Elevator" 
+[
+	height(integer) : "Travel altitude (can be negative)" : 0
+	sounds(choices) : "Sound group" : 1 =
+	[
+		0: "None"
+		1: "Base fast"
+		2: "Chain Slow"
+	]
+]	
+
+@SolidClass = func_illusionary : "Solids can be walked through" []
+
+//
+// triggers
+//
+
+@baseclass base(Target) = Trigger
+[
+	style(integer) : "Style" : 32
+	killtarget(target_destination) : "Kill target"
+	sounds(choices) : "Sound style" : 3 =
+	[
+		1 : "Secret sound"
+		2 : "Beep beep"
+		3 : "Large switch"
+		4 : "Set message to text string"
+	]
+	delay(integer) : "Delay before trigger" : 2
+	message(string) : "Message (set sound too!)"
+]
+
+@SolidClass = trigger_changelevel : "Trigger: Change level"
+[
+	map(string) : "New map name"
+	spawnflags(flags) =
+	[
+		1: "No Intermission" : 0
+	]
+]
+
+@SolidClass base(Trigger) = trigger_once : "Trigger: Activate once"
+[
+	spawnflags(flags) = [ 1: "Entity only" : 0 ]
+]
+@SolidClass base(Trigger) = trigger_multiple : "Trigger: Activate multiple" 
+[
+	spawnflags(flags) = [ 1: "Entity only" : 0 ]
+	wait(integer) : "Delay before reset" : 10
+]
+@SolidClass base(Trigger) = trigger_secret : "Trigger: Secret" 
+[
+	spawnflags(flags) = [ 1: "Entity only" : 0 ]
+	wait(integer) : "Delay before reset" : 10
+]
+
+@SolidClass base(Targetname, Target) = trigger_teleport : "Trigger teleport" 
+[
+	spawnflags(Flags) =
+	[
+		1 : "Player only" : 0
+		2 : "Silent" : 0
+	]
+]
+
+@SolidClass base(Trigger) = trigger_push : "Trigger player push"
+[
+	spawnflags(flags) = [ 1: "Once Only" : 0 ]
+	speed(integer) : "Speed of push" : 40
+]
+@SolidClass base(Trigger) = trigger_hurt : "Trigger player hurt" 
+[
+	dmg(integer) : "Damage" : 10
+]
+
+//
+// Half-Life things
+//
+
+@BaseClass = RenderFields 
+[
+	rendermode(choices) : "Render Mode" : 0 : "Controls the type of rendering that is used for an object. Options are:" =
+	[
+		0: "Normal"
+		1: "Color"
+		2: "Texture"
+		3: "Glow"
+		4: "Solid"
+		5: "Additive"
+	]
+	renderamt(integer) : "FX Amount (1 - 255)"
+	rendercolor(color255) : "FX Color (R G B)" : "0 0 0"
+]
+
+@BaseClass = Global 
+[ 
+	globalname(string) : "Global Entity Name" 
+]
+
+@BaseClass = Angles
+[
+	angles(string) : "Pitch Yaw Roll (Y Z X)" : "0 0 0" : "Sets the pitch (up / down), yaw (left / right) and roll (bank) respectively. The compass in Jackhammer corresponds to Yaw. The settings are not always (or not all) used."
+]
+
+@BaseClass base(Targetname, RenderFields) = Breakable
+[
+	target(target_destination) : "Target on break"
+	health(integer) : "Strength" : 1
+]
+
+@SolidClass base(Appearflags, RenderFields) = func_wall : "Moving wall" []
+
+@SolidClass base(Breakable) = func_breakable : "Breakable Object" 
+[
+	spawnflags(flags) =
+	[
+		1 : "Only Trigger" : 0
+		2 : "Touch"	   : 0
+		4 : "Pressure"     : 0
+		256: "Instant Melee" : 0
+	]
+]
+
+@SolidClass base(Targetname) = func_ladder : "Ladder" []
+
+@SolidClass base(Breakable) = func_pushable : "Pushable object"
+[
+	spawnflags(flags) =
+	[
+		128: "Breakable" : 0
+	]
+	friction(integer) : "Friction (0-400)" : 50
+	buoyancy(integer) : "Buoyancy" : 20
+]
+
+@SolidClass base(Targetname, Global, Angles) = func_rotating : "Rotating Object"
+[
+	speed(integer)	: "Rotation Speed" : 0
+	spawnflags(flags) =
+	[
+		1 : "Start ON" 		: 0
+		2 : "Reverse Direction" : 0
+		4 : "X Axis" 		: 0
+		8 : "Y Axis" 		: 0
+		16: "Acc/Dcc"		: 0
+		32: "Fan Pain"		: 0
+		64: "Not Solid"		: 0
+		128: "Small Radius" : 0
+		256: "Medium Radius" : 0
+		512: "Large Radius" : 1	
+	]
+	spawnorigin(string) : "X Y Z - Move here after lighting" : "0 0 0"
+	dmg(integer) : "Damage inflicted when blocked" : 0
+]
+
+@SolidClass base(Door) = func_water : "Liquid" 
+[
+	spawnflags(flags) =
+	[
+		1 : "Starts Open" : 0
+		256:"Use Only" : 0
+	]
+]
+
+@PointClass base(Targetname, Angles) iconsprite("sprites/light_environment.spr") flags(Light) = light_environment : "This entity makes a map's sky emit light. The only practical way of lighting outdoor maps."
+[
+	pitch(integer) : "Pitch" : 0 : "A negative number will give downward pitch (which is normally what you want)."
+	_light(color255) : "Brightness" : "255 255 128 200" : "First three integer numbers are the color (RGB). The fourth number is the brightness."
+]
+
+//
+// Dusk stuff
+//
+
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/quaddama.mdl") = 
+	pickup_super_damage : "Super damage" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/quaddama.mdl") = 
+	pickup_fast_fire : "Fast fire" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/invisibl.mdl") = 
+	pickup_climber : "Climber" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/suit.mdl") = 
+	pickup_lava_suit : "Lava suit" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/backpack.mdl") = 
+	pickup_bag : "Bag" []
+@PointClass size(-16 -16 -24, 16 16 32) offset(0 0 24) base(Appearflags) studio("progs/backpack.mdl") = 
+	pickup_backpack : "Backpack" []
+@PointClass size(-16 -16 -24, 16 16 32) base(Appearflags) studio("progs/armor.mdl") skin(2) = 
+	pickup_coin : "Coin" []
+@PointClass size(-16 -16 -24, 16 16 32) base(Appearflags) studio("progs/armor.mdl") skin(2) = 
+	pickup_diamond : "Diamond" []
+@PointClass base(Ammo) studio("progs/missile.mdl") = pickup_flashlight : "Flashlight" []
+@PointClass base(Ammo) studio("progs/grenade.mdl") = pickup_grenade : "Grenade" []
+@PointClass base(Ammo) studio("maps/b_nail0.bsp") = pickup_grenade_box : "Grenade Box" []
+@PointClass size(-16 -16 0, 16 16 16) base(Appearflags) studio("maps/b_bh25.bsp") = pickup_health_hallowed : "Hallowed Health" []
+@PointClass size(-16 -16 0, 16 16 16) base(Appearflags) studio("maps/b_bh25.bsp") = pickup_health_large : "Large Health" []
+@PointClass size(-16 -16 0, 16 16 16) base(Appearflags) studio("maps/b_bh25.bsp") = pickup_health_medium : "Medium Health" []
+@PointClass size(-16 -16 0, 16 16 16) base(Appearflags) studio("maps/b_bh25.bsp") = pickup_health_small : "Small Health" []
+@PointClass size(-16 -16 0, 16 16 16) base(Appearflags) studio("maps/b_bh25.bsp") = pickup_serum : "Serum" []
+@PointClass base(Ammo) studio("maps/b_nail0.bsp") = pickup_arrows : "Arrows" []
+@PointClass base(Ammo) studio("maps/b_nail0.bsp") = pickup_mg_clip : "MG Clip" []
+@PointClass base(Ammo) studio("maps/b_batt0.bsp") = pickup_pistol_bullet : "Pistol Bullet" []
+@PointClass base(Ammo) studio("maps/b_nail0.bsp") = pickup_pistol_clip : "Pistol Clip" []
+@PointClass base(Ammo) studio("maps/b_nail0.bsp") = pickup_rifle_box : "Rifle Box" []
+@PointClass base(Ammo) studio("maps/b_batt0.bsp") = pickup_rifle_bullet : "Rifle Bullet" []
+@PointClass base(Ammo) studio("maps/b_rock0.bsp") = pickup_rivet : "Rivet" []
+@PointClass base(Ammo) studio("maps/b_shell0.bsp") = pickup_shotgun_box : "Shells" []
+@PointClass base(Ammo) studio("maps/b_shell0.bsp") = pickup_shotgun_shell : "Shells" []
+
+@baseclass size(-16 -16 0, 16 16 32) color(0 0 200) base(Appearflags) = Weapon []
+@PointClass base(Weapon) studio("progs/g_nail.mdl") = weapon_sword : "Sword" []
+@PointClass base(Weapon) studio("progs/g_nail.mdl") = weapon_pistol : "Pistol" []
+@PointClass base(Weapon) studio("progs/g_shot.mdl") = weapon_shotgun : "Shotgun" []
+@PointClass base(Weapon) studio("progs/g_shot.mdl") = weapon_supershotgun : "Super shotgun" []
+@PointClass base(Weapon) studio("progs/g_nail2.mdl") = weapon_mg : "Assault Rifle" []
+@PointClass base(Weapon) studio("progs/g_nail.mdl") = weapon_rifle : "Rifle" []
+@PointClass base(Weapon) studio("progs/g_light.mdl") = weapon_crossbow : "Crossbow" []
+@PointClass base(Weapon) studio("progs/g_rock.mdl") = weapon_mortar : "Mortar" []
+@PointClass base(Weapon) studio("progs/g_rock2.mdl") = weapon_riveter : "Riveter" []
+
+@PointClass offset(0 0 8) = prop_barrel []
+@PointClass offset(0 0 8) = prop_barrel_exploding_1 []
+@PointClass offset(0 0 8) = prop_barrel_exploding_2 []
+@PointClass offset(0 0 8) = prop_barrel_exploding_3 []
+@PointClass offset(0 0 8) = prop_barrel_wood []
+@PointClass offset(0 0 8) = prop_basketball []
+@PointClass offset(0 0 8) = prop_berserk []
+@PointClass offset(0 0 8) = prop_board []
+@PointClass offset(0 0 8) = prop_bone []
+@PointClass offset(0 0 8) = prop_book []
+@PointClass offset(0 0 8) = prop_bottle []
+@PointClass offset(0 0 8) = prop_box []
+@PointClass offset(0 0 8) = prop_box_metal []
+@PointClass offset(0 0 8) = prop_brick []
+@PointClass offset(0 0 8) = prop_bucket []
+@PointClass offset(0 0 8) = prop_buzzsaw []
+@PointClass offset(0 0 8) = prop_can []
+@PointClass offset(0 0 8) = prop_candle []
+@PointClass offset(0 0 8) = prop_chair []
+@PointClass offset(0 0 8) = prop_cleaver []
+@PointClass offset(0 0 8) = prop_fork []
+@PointClass offset(0 0 8) = prop_gascan []
+@PointClass offset(0 0 8) = prop_gib []
+@PointClass offset(0 0 8) = prop_hammer []
+@PointClass offset(0 0 8) = prop_hay []
+@PointClass offset(0 0 8) = prop_log []
+@PointClass offset(0 0 8) = prop_pipe []
+@PointClass offset(0 0 8) = prop_pitchfork []
+@PointClass offset(0 0 8) = prop_plate []
+@PointClass offset(0 0 8) = prop_pliers []
+@PointClass offset(0 0 8) = prop_ribs []
+@PointClass offset(0 0 8) = prop_rock_big []
+@PointClass offset(0 0 8) = prop_rock_small []
+@PointClass offset(0 0 8) = prop_skull []
+@PointClass offset(0 0 8) = prop_soap []
+@PointClass offset(0 0 8) = prop_tire []
+@PointClass offset(0 0 8) = prop_torch []
+@PointClass offset(0 0 8) = prop_vase []
+
+@PointClass offset(0 0 8) = object_altar []
+@PointClass offset(0 0 8) = object_anomaly []
+@PointClass offset(0 0 8) = object_anomaly_fire []
+@PointClass offset(0 0 8) = object_bad []
+@PointClass offset(0 0 8) = object_big_machine []
+@PointClass offset(0 0 8) = object_big_machine_2 []
+@PointClass offset(0 0 8) = object_big_machine_3 []
+@PointClass offset(0 0 8) = object_blades []
+@PointClass offset(0 0 8) = object_blower []
+@PointClass offset(0 0 8) = object_board []
+@PointClass offset(0 0 8) = object_bulldozer []
+@PointClass offset(0 0 8) = object_burn_barrel []
+@PointClass offset(0 0 8) = object_bush []
+@PointClass offset(0 0 8) = object_campfire []
+@PointClass offset(0 0 8) = object_car []
+@PointClass offset(0 0 8) = object_cattail []
+@PointClass offset(0 0 8) = object_cobweb []
+@PointClass offset(0 0 8) = object_couch []
+@PointClass offset(0 0 8) = object_cup []
+@PointClass offset(0 0 8) = object_cupboard []
+@PointClass offset(0 0 8) = object_electric_tower []
+@PointClass offset(0 0 8) = object_fireball_shooter []
+@PointClass offset(0 0 8) = object_floating_wendigo []
+@PointClass offset(0 0 8) = object_forklift []
+@PointClass offset(0 0 8) = object_grappler []
+@PointClass offset(0 0 8) = object_grass []
+@PointClass offset(0 0 8) = object_hay_bale []
+@PointClass offset(0 0 8) = object_insulator []
+@PointClass offset(0 0 8) = object_jump_pad []
+@PointClass offset(0 0 8) = object_lamp []
+@PointClass offset(0 0 8) = object_leanto []
+@PointClass offset(0 0 8) = object_light_fixture_1 []
+@PointClass offset(0 0 8) = object_light_fixture_2 []
+@PointClass offset(0 0 8) = object_light_fixture_3 []
+@PointClass offset(0 0 8) = object_light_post_1 []
+@PointClass offset(0 0 8) = object_light_post_2 []
+@PointClass offset(0 0 8) = object_light_post_3 []
+@PointClass offset(0 0 8) = object_liquid_tank []
+@PointClass offset(0 0 8) = object_machine_1 []
+@PointClass offset(0 0 8) = object_mattress []
+@PointClass offset(0 0 8) = object_meathook []
+@PointClass offset(0 0 8) = object_minecart []
+@PointClass offset(0 0 8) = object_mushroom []
+@PointClass offset(0 0 8) = object_pew []
+@PointClass offset(0 0 8) = object_pumpkin_1 []
+@PointClass offset(0 0 8) = object_pumpkin_2 []
+@PointClass offset(0 0 8) = object_shed []
+@PointClass offset(0 0 8) = object_shower []
+@PointClass offset(0 0 8) = object_sink []
+@PointClass offset(0 0 8) = object_speaker []
+@PointClass offset(0 0 8) = object_streetlight []
+@PointClass offset(0 0 8) = object_table_1 []
+@PointClass offset(0 0 8) = object_table_2 []
+@PointClass offset(0 0 8) = object_teleporter []
+@PointClass offset(0 0 8) = object_toilet []
+@PointClass offset(0 0 8) = object_toiletpaper []
+@PointClass offset(0 0 8) = object_torch []
+@PointClass offset(0 0 8) = object_tractor []
+@PointClass offset(0 0 8) = object_trashbag []
+@PointClass offset(0 0 8) = object_trashcan []
+@PointClass offset(0 0 8) = object_tree_1 []
+@PointClass offset(0 0 8) = object_tree_2 []
+@PointClass offset(0 0 8) = object_tree_3 []
+@PointClass offset(0 0 8) = object_tree_4 []
+@PointClass offset(0 0 8) = object_tree_5 []
+@PointClass offset(0 0 8) = object_tree_alive []
+@PointClass offset(0 0 8) = object_tree_broken []
+@PointClass offset(0 0 8) = object_tree_pine []
+@PointClass offset(0 0 8) = object_tree_stump []
+@PointClass offset(0 0 8) = object_tree_surreal []
+@PointClass offset(0 0 8) = object_valve []
+@PointClass offset(0 0 8) = object_worklight []
