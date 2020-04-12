@@ -4,16 +4,21 @@ This is a basic folder structure and asset framework for Dusk given the current 
 
 ## This repo begins in your Dusk SDK folder
 
-### dusk_wads.7z - unzip these wads for your respective editor, or make more of your own.
-+ dusk.wad - general textures
+### dusk_wads_tb.7z - unzip these wads for TrenchBroom.
++ **dusk.wad** - general textures
 
-+ dusk_transparent.wad - transparent textures
++ **dusk_transparent.wad** - transparent textures
+
+### dusk_wads_tb.7z - unzip the wad for J.A.C.K. (WAD3 format not compatible with TrenchBroom)
++ **dusk_wad3.wad** - general textures
 
 **dusk.fgd** - entity definitions for the TrenchBroom editor 
 
 **dusk_qmdl.fgd** - entity definitions for the J.A.C.K. editor 
 
 **entities.txt** - list of entities both sharing with and similar to Half-Life & Quake
+
+**quake.pal** - original Quake palette for J.A.C.K. configuration 
 
 
 ## Other essential tools
