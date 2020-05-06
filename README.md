@@ -10,7 +10,7 @@ This is a basic folder structure and asset framework for Dusk given the current 
 + **dusk_transparent.wad** - transparent textures
 
 ### dusk_wads_tb.7z - unzip the wad for J.A.C.K. (WAD3 format not compatible with TrenchBroom)
-+ **dusk_wad3.wad** - general textures
++ **dusk_wad3.wad** - general/transparent textures
 
 **dusk.fgd** - entity definitions for the TrenchBroom editor 
 
